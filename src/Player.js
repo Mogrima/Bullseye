@@ -8,16 +8,22 @@ export class Player {
         this.speedY = 0;
         this.dx = 0;
         this.dy = 0;
+        this.speedModifer = 50;
     }
 
     update() {
         this.dx = this.game.mouse.x - this.collisionX;
         this.dy = this.game.mouse.y - this.collisionY;
         const distance = Math.hypot(this.dx, this.dy);
-        this.speedX = this.dx/distance || 0;
-        this.speedY = this.dy/distance || 0;
-        this.collisionX += this.speedX;
-        this.collisionY += this.speedY;
+        if (distance > this.speedModifer) {
+            this.speedX = this.dx/distance || 0;
+            this.speedY = this.dy/distance || 0;
+        } else {
+            this.speedX = 0;
+            this.speedY = 0;
+        }
+        this.collisionX += this.speedX * this.speedModifer;
+        this.collisionY += this.speedY * this.speedModifer;
     }
     
     draw(context) {
