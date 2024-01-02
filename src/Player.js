@@ -13,8 +13,9 @@ export class Player {
     update() {
         this.dx = this.game.mouse.x - this.collisionX;
         this.dy = this.game.mouse.y - this.collisionY;
-        this.speedX = this.dx/20;
-        this.speedY = this.dy/20;
+        const distance = Math.hypot(this.dx, this.dy);
+        this.speedX = this.dx/distance || 0;
+        this.speedY = this.dy/distance || 0;
         this.collisionX += this.speedX;
         this.collisionY += this.speedY;
     }
