@@ -5,6 +5,11 @@ export class Player {
         this.collisionY = this.game.height * 0.5;
         this.collisionRadius = 30;
     }
+
+    update() {
+        this.collisionX = this.game.mouse.x;
+        this.collisionY = this.game.mouse.y;
+    }
     
     draw(context) {
         context.beginPath();
