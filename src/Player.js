@@ -14,7 +14,7 @@ export class Player {
     update() {
         this.dx = this.game.mouse.x - this.collisionX;
         this.dy = this.game.mouse.y - this.collisionY;
-        const distance = Math.hypot(this.dx, this.dy);
+        const distance = Math.hypot(this.dy, this.dx);
         if (distance > this.speedModifer) {
             this.speedX = this.dx/distance || 0;
             this.speedY = this.dy/distance || 0;
@@ -24,6 +24,19 @@ export class Player {
         }
         this.collisionX += this.speedX * this.speedModifer;
         this.collisionY += this.speedY * this.speedModifer;
+        // collisions with obstacles
+        this.game.obstacles.forEach(obstacle => {
+            // destructuring assignment
+            let [collision, distance, sumOfRadius, dx, dy] = this.game.checkCollision(this, obstacle);
+            if (collision) {
+                const unit_x = dx / distance;
+                const unit_y = dy / distance;
+                this.collisionX = obstacle.collisionX +
+                (sumOfRadius + 1) * unit_x;
+                this.collisionY = obstacle.collisionY +
+                (sumOfRadius + 1) * unit_y;
+            }
+        })
     }
     
     draw(context) {
