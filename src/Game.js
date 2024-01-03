@@ -36,9 +36,9 @@ export class Game {
     }
 
     render(context) {
+        this.obstacles.forEach(obstacle => obstacle.draw(context));
         this.player.draw(context);
         this.player.update();
-        this.obstacles.forEach(obstacle => obstacle.draw(context));
     }
     checkCollision(a, b) {
         const dx = a.collisionX - b.collisionX;
