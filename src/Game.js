@@ -70,7 +70,7 @@ export class Game {
                         overlap = true;
                     }
                 });
-                const margin = testObstacle.collisionRadius * 2;
+                const margin = testObstacle.collisionRadius * 3;
                 if (!overlap && testObstacle.spriteX > 0 &&
                     testObstacle.spriteX < this.width - testObstacle.width &&
                     testObstacle.collisionY > this.topMargin + margin &&
