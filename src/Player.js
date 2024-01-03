@@ -47,6 +47,18 @@ export class Player {
         this.collisionY += this.speedY * this.speedModifer;
         this.spriteX = this.collisionX - this.width * 0.5;
         this.spriteY = this.collisionY - this.height * 0.5 - 100;
+        // horizontal boundaries
+        if (this.collisionX < this.collisionRadius) {
+            this.collisionX = this.collisionRadius;
+        } else if (this.collisionX > this.game.width - this.collisionRadius) {
+            this.collisionX = this.game.width - this.collisionRadius;
+        }
+        // vertical boundaries
+        if (this.collisionY < this.game.topMargin + this.collisionRadius) {
+            this.collisionY = this.game.topMargin + this.collisionRadius;
+        } else if (this.collisionY > this.game.height - this.collisionRadius) {
+            this.collisionY = this.game.height - this.collisionRadius
+        }
         // collisions with obstacles
         this.game.obstacles.forEach(obstacle => {
             // destructuring assignment
