@@ -54,7 +54,10 @@ export class Game {
             context.clearRect(0, 0, this.width, this.height);
             // animate next frame
             this.obstacles.forEach(obstacle => obstacle.draw(context));
-            this.eggs.forEach(egg => egg.draw(context));
+            this.eggs.forEach(egg => {
+                egg.draw(context);
+                egg.update();
+            });
             this.player.draw(context);
             this.player.update();
             this.timer = 0;
