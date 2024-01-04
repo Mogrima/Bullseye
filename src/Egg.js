@@ -1,9 +1,10 @@
 export class Egg {
     constructor(game) {
         this.game = game;
-        this.collisionX = Math.random() * this.game.width;
-        this.collisionY = Math.random() * this.game.height;
         this.collisionRadius = 40;
+        this.margin = this.collisionRadius * 2;
+        this.collisionX = this.margin + (Math.random() * (this.game.width - this.margin * 2));
+        this.collisionY = this.game.topMargin + (Math.random() * (this.game.height - this.game.topMargin - this.margin));
         this.image = document.getElementById('egg');
         this.spriteWidth = 110;
         this.spriteHeight = 135;
