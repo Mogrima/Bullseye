@@ -1,5 +1,6 @@
 import { Player } from './Player.js';
 import { Obstacles } from './Obstacles.js';
+import { Egg } from './Egg.js';
 
 export class Game {
     constructor(canvas) {
@@ -16,6 +17,10 @@ export class Game {
         this.player = new Player(this);
         this.numberOfObstacles = 10;
         this.obstacles = [];
+        this.maxEggs = 10;
+        this.eggs = [];
+        this.eggTimer = 0;
+        this.eggInterval = 500;
         this.mouse = {
             x: this.width * 0.5,
             y: this.height * 0.5,
@@ -49,11 +54,22 @@ export class Game {
             context.clearRect(0, 0, this.width, this.height);
             // animate next frame
             this.obstacles.forEach(obstacle => obstacle.draw(context));
+            this.eggs.forEach(egg => egg.draw(context));
             this.player.draw(context);
             this.player.update();
             this.timer = 0;
         }
         this.timer += deltatime;
+
+        // add eggs periodically
+        if (this.eggTimer > this.eggInterval &&
+            this.eggs.length < this.maxEggs) {
+            this.addEgg();
+            this.eggTimer = 0;
+            console.log(this.eggs);
+        } else {
+            this.eggTimer += deltatime;
+        }
     }
     checkCollision(a, b) {
         const dx = a.collisionX - b.collisionX;
@@ -61,6 +77,10 @@ export class Game {
         const distance = Math.hypot(dy, dx);
         const sumOfRadius = a.collisionRadius + b.collisionRadius;
         return [(distance < sumOfRadius), distance, sumOfRadius, dx, dy];
+    }
+
+    addEgg() {
+        this.eggs.push(new Egg(this));
     }
 
     init() {
