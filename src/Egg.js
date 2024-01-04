@@ -10,7 +10,7 @@ export class Egg {
         this.width = this.spriteWidth;
         this.height = this.spriteHeight;
         this.spriteX = this.collisionX - this.width * 0.5;
-        this.spriteY = this.collisionY - this.height * 0.5;
+        this.spriteY = this.collisionY - this.height * 0.5 - 30;
     }
 
     draw(context) {
