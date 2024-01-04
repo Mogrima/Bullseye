@@ -15,12 +15,16 @@ export class Game {
         this.interval = 1000/this.fps;
 
         this.player = new Player(this);
+
         this.numberOfObstacles = 10;
         this.obstacles = [];
-        this.maxEggs = 10;
+
+        this.maxEggs = 20;
         this.eggs = [];
         this.eggTimer = 0;
-        this.eggInterval = 500;
+        this.eggInterval = 1000;
+
+        this.gameObjects = [];
         this.mouse = {
             x: this.width * 0.5,
             y: this.height * 0.5,
@@ -52,14 +56,17 @@ export class Game {
         if (this.timer > this.interval) {
             // clear previous frame
             context.clearRect(0, 0, this.width, this.height);
-            // animate next frame
-            this.obstacles.forEach(obstacle => obstacle.draw(context));
-            this.eggs.forEach(egg => {
-                egg.draw(context);
-                egg.update();
+            // объединяем все игровые объекты в один массив
+            this.gameObjects = [...this.eggs, ...this.obstacles, this.player];
+            // sort by vertical position
+            this.gameObjects.sort((a, b) =>{
+                return a.collisionY - b.collisionY;
             });
-            this.player.draw(context);
-            this.player.update();
+            // animate next frame
+            this.gameObjects.forEach(object => {
+                object.draw(context);
+                object.update();
+            });
             this.timer = 0;
         }
         this.timer += deltatime;

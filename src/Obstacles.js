@@ -29,4 +29,5 @@ export class Obstacles {
                 context.restore();
             }
     }
+    update() {}
 }
