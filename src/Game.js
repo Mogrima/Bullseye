@@ -9,6 +9,10 @@ export class Game {
         this.topMargin = 260;
         this.debug = true;
 
+        this.fps = 70;
+        this.timer = 0;
+        this.interval = 1000/this.fps;
+
         this.player = new Player(this);
         this.numberOfObstacles = 10;
         this.obstacles = [];
@@ -39,10 +43,17 @@ export class Game {
         });
     }
 
-    render(context) {
-        this.obstacles.forEach(obstacle => obstacle.draw(context));
-        this.player.draw(context);
-        this.player.update();
+    render(context, deltatime) {
+        if (this.timer > this.interval) {
+            // clear previous frame
+            context.clearRect(0, 0, this.width, this.height);
+            // animate next frame
+            this.obstacles.forEach(obstacle => obstacle.draw(context));
+            this.player.draw(context);
+            this.player.update();
+            this.timer = 0;
+        }
+        this.timer += deltatime;
     }
     checkCollision(a, b) {
         const dx = a.collisionX - b.collisionX;
