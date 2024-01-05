@@ -1,6 +1,7 @@
 import { Player } from './Player.js';
 import { Obstacles } from './Obstacles.js';
 import { Egg } from './Egg.js';
+import { Enemy } from './Enemy.js';
 
 export class Game {
     constructor(canvas) {
@@ -23,6 +24,8 @@ export class Game {
         this.eggs = [];
         this.eggTimer = 0;
         this.eggInterval = 1000;
+
+        this.enemies = [];
 
         this.gameObjects = [];
         this.mouse = {
@@ -56,8 +59,8 @@ export class Game {
         if (this.timer > this.interval) {
             // clear previous frame
             context.clearRect(0, 0, this.width, this.height);
-            // объединяем все игровые объекты в один массив
-            this.gameObjects = [...this.eggs, ...this.obstacles, this.player];
+            // combine all game objects into one array
+            this.gameObjects = [this.player, ...this.eggs, ...this.obstacles, ...this.enemies];
             // sort by vertical position
             this.gameObjects.sort((a, b) =>{
                 return a.collisionY - b.collisionY;
@@ -76,7 +79,6 @@ export class Game {
             this.eggs.length < this.maxEggs) {
             this.addEgg();
             this.eggTimer = 0;
-            console.log(this.eggs);
         } else {
             this.eggTimer += deltatime;
         }
@@ -93,7 +95,14 @@ export class Game {
         this.eggs.push(new Egg(this));
     }
 
+    addEnemy() {
+        this.enemies.push(new Enemy(this));
+    }
+
     init() {
+        for (let i = 0; i < 3; i++) {
+            this.addEnemy();
+        }
         // circle packing
         let attempts = 0;
         while(this.obstacles.length < this.
