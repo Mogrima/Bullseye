@@ -18,6 +18,7 @@ window.addEventListener('load', function() {
         const deltatime = timeStamp - lastTime;
         lastTime = timeStamp;
         game.render(ctx, deltatime);
+        // if (!game.gameOver) requestAnimationFrame(animate);
         requestAnimationFrame(animate);
     }
 
