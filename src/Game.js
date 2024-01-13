@@ -99,6 +99,11 @@ export class Game {
         this.enemies.push(new Enemy(this));
     }
 
+    removeGameObjects(array) {
+        array = array.filter(object => !object.markedForDeletion);
+        return array;
+    }
+
     init() {
         for (let i = 0; i < 3; i++) {
             this.addEnemy();
