@@ -1,4 +1,5 @@
 import { Farefly } from "./Farefly.js";
+import { Spark } from "./Spark.js";
 
 export class Larva {
     constructor(game, x, y) {
@@ -49,6 +50,10 @@ export class Larva {
                 this.markedForDeletion = true;
                 this.game.removeGameObjects();
                 this.game.lostHatchlings++;
+                for (let i = 0; i < 5; i++) {
+                    this.game.particles.push(new Spark(this.game, this.collisionX,
+                        this.collisionY, 'blue'));
+                }
             }
         })
     }
