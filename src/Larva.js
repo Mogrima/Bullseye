@@ -1,3 +1,5 @@
+import { Farefly } from "./Farefly.js";
+
 export class Larva {
     constructor(game, x, y) {
         this.game = game;
@@ -25,6 +27,10 @@ export class Larva {
             this.markedForDeletion = true;
             this.game.removeGameObjects();
             this.game.score++;
+            for (let i = 0; i < 3; i++) {
+                this.game.particles.push(new Farefly(this.game, this.collisionX,
+                    this.collisionY, 'yellow'));
+            }
         }
         // collision with objects
         let collisionObjects = [this.game.player, ...this.game.obstacles];
