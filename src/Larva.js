@@ -22,7 +22,7 @@ export class Larva {
     update() {
         this.collisionY -= this.speedY;
         this.spriteX = this.collisionX - this.width * 0.5;
-        this.spriteY = this.collisionY - this.height * 0.5 - 50;
+        this.spriteY = this.collisionY - this.height * 0.5 - 40;
         // move to safety
         if (this.collisionY < this.game.topMargin) {
             this.markedForDeletion = true;
