@@ -31,6 +31,8 @@ export class Game {
         this.score = 0;
         this.lostHatchlings = 0;
         this.hatchlings = [];
+
+        this.particles = [];
         this.mouse = {
             x: this.width * 0.5,
             y: this.height * 0.5,
@@ -64,7 +66,7 @@ export class Game {
             context.clearRect(0, 0, this.width, this.height);
             // combine all game objects into one array
             this.gameObjects = [this.player, ...this.eggs, ...this.obstacles,
-                ...this.enemies, ...this.hatchlings];
+                ...this.enemies, ...this.hatchlings, ...this.particles];
             // sort by vertical position
             this.gameObjects.sort((a, b) =>{
                 return a.collisionY - b.collisionY;
@@ -115,6 +117,7 @@ export class Game {
     removeGameObjects() {
         this.eggs = this.eggs.filter(object => !object.markedForDeletion);
         this.hatchlings = this.hatchlings.filter(object => !object.markedForDeletion);
+        this.particles = this.particles.filter(object => !object.markedForDeletion);
     }
 
     init() {
