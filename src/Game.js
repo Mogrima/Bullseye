@@ -28,6 +28,7 @@ export class Game {
         this.enemies = [];
 
         this.gameObjects = [];
+        this.hatchlings = [];
         this.mouse = {
             x: this.width * 0.5,
             y: this.height * 0.5,
@@ -60,7 +61,8 @@ export class Game {
             // clear previous frame
             context.clearRect(0, 0, this.width, this.height);
             // combine all game objects into one array
-            this.gameObjects = [this.player, ...this.eggs, ...this.obstacles, ...this.enemies];
+            this.gameObjects = [this.player, ...this.eggs, ...this.obstacles,
+                ...this.enemies, ...this.hatchlings];
             // sort by vertical position
             this.gameObjects.sort((a, b) =>{
                 return a.collisionY - b.collisionY;
@@ -68,7 +70,7 @@ export class Game {
             // animate next frame
             this.gameObjects.forEach(object => {
                 object.draw(context);
-                object.update();
+                object.update(deltatime);
             });
             this.timer = 0;
         }
