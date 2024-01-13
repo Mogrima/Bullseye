@@ -23,7 +23,7 @@ export class Larva {
         // move to safety
         if (this.collisionY < this.game.topMargin) {
             this.markedForDeletion = true;
-            this.game.hatchlings = this.game.removeGameObjects(this.game.hatchlings);
+            this.game.removeGameObjects();
             this.game.score++;
         }
         // collision with objects
@@ -41,7 +41,7 @@ export class Larva {
         this.game.enemies.forEach(enemy => {
             if (this.game.checkCollision(this, enemy)[0]) {
                 this.markedForDeletion = true;
-                this.game.removeGameObjects(this.game.hatchlings);
+                this.game.removeGameObjects();
                 this.game.lostHatchlings++;
             }
         })

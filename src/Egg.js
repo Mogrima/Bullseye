@@ -50,7 +50,7 @@ export class Egg {
         if (this.hatchingTimer > this.hatchingInterval) {
             this.game.hatchlings.push( new Larva(this.game, this.collisionX, this.collisionY));
             this.markedForDeletion = true;
-            this.game.eggs = this.game.removeGameObjects(this.game.eggs);
+            this.game.removeGameObjects();
         } else {
             this.hatchingTimer += deltatime;
         }

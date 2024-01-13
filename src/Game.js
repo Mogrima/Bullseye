@@ -103,9 +103,9 @@ export class Game {
         this.enemies.push(new Enemy(this));
     }
 
-    removeGameObjects(array) {
-        array = array.filter(object => !object.markedForDeletion);
-        return array;
+    removeGameObjects() {
+        this.eggs = this.eggs.filter(object => !object.markedForDeletion);
+        this.hatchlings = this.hatchlings.filter(object => !object.markedForDeletion);
     }
 
     init() {
