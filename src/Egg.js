@@ -29,7 +29,7 @@ export class Egg {
             context.fill();
             context.restore();
             const displayTimer = (this.hatchingTimer * 0.001).toFixed(0);
-            context.fillText(displayTimer, this.collisionX, this.collisionY - this.collisionRadius);
+            context.fillText(displayTimer, this.collisionX, this.collisionY - this.collisionRadius - 70);
         }
     }
     update(deltatime) {
