@@ -47,7 +47,8 @@ export class Egg {
         })
         
         // hatching 
-        if (this.hatchingTimer > this.hatchingInterval) {
+        if (this.hatchingTimer > this.hatchingInterval ||
+            this.collisionY < this.game.topMargin) {
             this.game.hatchlings.push( new Larva(this.game, this.collisionX, this.collisionY));
             this.markedForDeletion = true;
             this.game.removeGameObjects();
