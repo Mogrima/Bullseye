@@ -27,7 +27,7 @@ export class Larva {
         if (this.collisionY < this.game.topMargin) {
             this.markedForDeletion = true;
             this.game.removeGameObjects();
-            this.game.score++;
+            if (!this.game.gameOver) this.game.score++;
             for (let i = 0; i < 3; i++) {
                 this.game.particles.push(new Farefly(this.game, this.collisionX,
                     this.collisionY, 'yellow'));
@@ -49,7 +49,7 @@ export class Larva {
             if (this.game.checkCollision(this, enemy)[0]) {
                 this.markedForDeletion = true;
                 this.game.removeGameObjects();
-                this.game.lostHatchlings++;
+                if (!this.game.gameOver) this.game.lostHatchlings++;
                 for (let i = 0; i < 5; i++) {
                     this.game.particles.push(new Spark(this.game, this.collisionX,
                         this.collisionY, 'blue'));

@@ -84,7 +84,8 @@ export class Game {
 
         // add eggs periodically
         if (this.eggTimer > this.eggInterval &&
-            this.eggs.length < this.maxEggs) {
+            this.eggs.length < this.maxEggs &&
+            !this.gameOver) {
             this.addEgg();
             this.eggTimer = 0;
         } else {
@@ -150,7 +151,7 @@ export class Game {
     }
 
     init() {
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < 5; i++) {
             this.addEnemy();
         }
         // circle packing

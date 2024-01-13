@@ -39,7 +39,7 @@ export class Enemy {
         this.collisionX -= this.speedX;
         // повторное использование объектов, путем изменения их положения является хорошей практикой оптимизации
         // чем создавать новые объекты и удалить их потом
-        if (this.spriteX + this.width < 0) {
+        if (this.spriteX + this.width < 0 && !this.game.gameOver) {
             // Math.random() * this.game.width * 0.5 - добавляется к выражению чтобы задать 
             //рандомизированную задержку появления врагов
             this.collisionX = this.game.width + this.width +
