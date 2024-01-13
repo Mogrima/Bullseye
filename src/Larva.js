@@ -16,7 +16,7 @@ export class Larva {
     update() {
         this.collisionY -= this.speedY;
         this.spriteX = this.collisionX - this.width * 0.5;
-        this.speedY = this.collisionY - this.height * 0.5;
+        this.spriteY = this.collisionY - this.height * 0.5;
     }
     draw(context) {
         context.drawImage(this.image, this.spriteX, this.spriteY);
