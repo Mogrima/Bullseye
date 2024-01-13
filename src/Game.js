@@ -20,7 +20,7 @@ export class Game {
         this.numberOfObstacles = 10;
         this.obstacles = [];
 
-        this.maxEggs = 20;
+        this.maxEggs = 3;
         this.eggs = [];
         this.eggTimer = 0;
         this.eggInterval = 1000;
@@ -29,6 +29,8 @@ export class Game {
 
         this.gameObjects = [];
         this.score = 0;
+        this.winingScore = 5;
+        this.gameOver = false;
         this.lostHatchlings = 0;
         this.hatchlings = [];
 
@@ -97,6 +99,33 @@ export class Game {
             context.fillText('Lost: ' + this.lostHatchlings, 25, 100);
         }
         context.restore();
+
+        // win/lose message
+        if (this.score >= this.winingScore) {
+            this.gameOver = true;
+            context.save();
+            context.fillStyle = 'rgba(0, 0, 0, 0.5)';
+            context.fillRect(0, 0, this.width, this.height);
+            context.fillStyle = 'white';
+            context.textAlign = 'center';
+            let message1;
+            let message2;
+            if (this.lostHatchlings <= 5) {
+                // win
+                message1 = 'Bullseye!!!';
+                message2 = 'You bullied the bullies!';
+            } else {
+                // lose
+                message1 = 'Bullocks!'
+                message2 = 'You lost ' + this.lostHatchlings + ' hatchlings, don`t be a pushover!'
+            }
+            context.font = '130px Helvetica';
+            context.fillText(message1, this.width * 0.5, this.height * 0.5 - 20);
+            context.font = '40px Helvetica';
+            context.fillText(message2, this.width * 0.5, this.height * 0.5 + 30);
+            context.fillText("Final score " + this.score + ". Press 'R' to butt heads again!", this.width * 0.5, this.height * 0.5 + 80);
+            context.restore();
+        }
     }
     checkCollision(a, b) {
         const dx = a.collisionX - b.collisionX;
