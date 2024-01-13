@@ -34,7 +34,8 @@ export class Larva {
             }
         }
         // collision with objects
-        let collisionObjects = [this.game.player, ...this.game.obstacles];
+        let collisionObjects = [this.game.player, ...this.game.obstacles,
+            ...this.game.eggs];
         collisionObjects.forEach(object => {
             let [collison, distance, sumOfRadius, dx, dy] = this.game.checkCollision(this, object);
             if (collison) {
