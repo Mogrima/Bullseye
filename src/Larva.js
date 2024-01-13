@@ -12,12 +12,17 @@ export class Larva {
         this.spriteX;
         this.spriteY;
         this.speedY = 1 + Math.random();
+        this.markedForDeletion = false;
     }
     update() {
         this.collisionY -= this.speedY;
         this.spriteX = this.collisionX - this.width * 0.5;
-        this.spriteY = this.collisionY - this.height * 0.5;
-    }
+        this.spriteY = this.collisionY - this.height * 0.5 - 50;
+        // move to safety
+        if (this.collisionY < this.game.topMargin) {
+            this.markedForDeletion = true;
+            this.game.hatchlings = this.game.removeGameObjects(this.game.hatchlings);
+        }
     draw(context) {
         context.drawImage(this.image, this.spriteX, this.spriteY);
     }
