@@ -35,7 +35,8 @@ export class Egg {
     update(deltatime) {
         this.spriteX = this.collisionX - this.width * 0.5;
         this.spriteY = this.collisionY - this.height * 0.5 - 30;
-        let collisionObjects = [this.game.player, ...this.game.obstacles, ...this.game.enemies];
+        let collisionObjects = [this.game.player, ...this.game.obstacles,
+            ...this.game.enemies, ...this.game.hatchlings];
         collisionObjects.forEach(object => {
             let [collison, distance, sumOfRadius, dx, dy] = this.game.checkCollision(this, object);
             if (collison) {
