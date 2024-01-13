@@ -1,3 +1,5 @@
+import { Larva } from "./Larva.js";
+
 export class Egg {
     constructor(game) {
         this.game = game;
@@ -12,6 +14,9 @@ export class Egg {
         this.height = this.spriteHeight;
         this.spriteX;
         this.spriteY;
+        this.hatchingTimer = 0;
+        this.hatchingInterval = 3000;
+        this.markedForDeletion = false;
     }
 
     draw(context) {
@@ -25,7 +30,7 @@ export class Egg {
             context.restore();
         }
     }
-    update() {
+    update(deltatime) {
         this.spriteX = this.collisionX - this.width * 0.5;
         this.spriteY = this.collisionY - this.height * 0.5 - 30;
         let collisionObjects = [this.game.player, ...this.game.obstacles, ...this.game.enemies];
@@ -38,5 +43,14 @@ export class Egg {
                 this.collisionY = object.collisionY + (sumOfRadius + 1) * unit_y;
             }
         })
+        
+        // hatching 
+        if (this.hatchingTimer > this.hatchingInterval) {
+            this.game.hatchlings.push( new Larva(this.game, this.collisionX, this.collisionY));
+            this.markedForDeletion = true;
+            this.game.eggs = this.game.removeGameObjects(this.game.eggs);
+        } else {
+            this.hatchingTimer += deltatime;
+        }
     }
 }
