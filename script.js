@@ -8,7 +8,7 @@ window.addEventListener('load', function() {
     canvas.height = '720';
     ctx.fillStyle = 'pink';
     ctx.strokeStyle = 'black';
-    ctx.font = '40px Helvetica';
+    ctx.font = '40px Bangers';
     ctx.textAlign = 'center';
     const game = new Game(canvas);
     game.init();
