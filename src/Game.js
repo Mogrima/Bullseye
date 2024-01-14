@@ -9,7 +9,7 @@ export class Game {
         this.width = this.canvas.width;
         this.height = this.canvas.height;
         this.topMargin = 260;
-        this.debug = true;
+        this.debug = false;
 
         this.fps = 70;
         this.timer = 0;
@@ -20,7 +20,7 @@ export class Game {
         this.numberOfObstacles = 10;
         this.obstacles = [];
 
-        this.maxEggs = 3;
+        this.maxEggs = 6;
         this.eggs = [];
         this.eggTimer = 0;
         this.eggInterval = 1000;
@@ -29,7 +29,7 @@ export class Game {
 
         this.gameObjects = [];
         this.score = 0;
-        this.winingScore = 5;
+        this.winingScore = 30;
         this.gameOver = false;
         this.lostHatchlings = 0;
         this.hatchlings = [];
