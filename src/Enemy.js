@@ -15,7 +15,7 @@ export class Enemy {
         (Math.random() * (this.game.height - this.game.topMargin));
         this.spriteX;
         this.spriteY;
-        this.frameX = 0;
+        this.frameX = Math.floor(Math.random() * 4);
         this.frameY = Math.floor(Math.random() * 4);
     }
 
