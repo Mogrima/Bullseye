@@ -187,7 +187,7 @@ export class Game {
                     const dx = testObstacle.collisionX - obstacle.collisionX;
                     const dy = testObstacle.collisionY - obstacle.collisionY;
                     const distance = Math.hypot(dy, dx);
-                    const distanceBuffer = 150;
+                    const distanceBuffer = 100;
                     const sumOfRadius = testObstacle.collisionRadius + obstacle.collisionRadius + distanceBuffer;
                     if (distance < sumOfRadius) {
                         overlap = true;
