@@ -5,6 +5,13 @@
     font-family: 'Bangers', system-ui;
 }
 
+html {
+    background-image: url('./Assets/backgrounds/background_shadow.png'),
+    url('./Assets/backgrounds/sunrays1.png'),
+    url('./Assets/backgrounds/back.png');
+    background-size: cover;
+}
+
 #canvas1 {
     position: absolute;
     top: 50%;
