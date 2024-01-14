@@ -59,6 +59,7 @@ export class Game {
         });
         window.addEventListener('keydown', e => {
             if (e.key === 'd') this.debug = !this.debug;
+            else if (e.key === 'r' || e.key === 'R') this.restart();
         });
     }
 
@@ -151,6 +152,24 @@ export class Game {
         this.eggs = this.eggs.filter(object => !object.markedForDeletion);
         this.hatchlings = this.hatchlings.filter(object => !object.markedForDeletion);
         this.particles = this.particles.filter(object => !object.markedForDeletion);
+    }
+
+    restart() {
+        this.player.restart();
+        this.eggs = [];
+        this.obstacles = [];
+        this.hatchlings = [];
+        this.particles = [];
+        this.enemies = [];
+        this.init();
+        this.mouse = {
+            x: this.width * 0.5,
+            y: this.height * 0.5,
+            pressed: false,
+        };
+        this.lostHatchlings = 0;
+        this.score = 0;
+        this.gameOver = false;
     }
 
     init() {
