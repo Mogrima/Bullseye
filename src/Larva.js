@@ -1,5 +1,5 @@
-import { Farefly } from "./Farefly.js";
-import { Spark } from "./Spark.js";
+import { Farefly } from './Farefly.js';
+import { Spark } from './Spark.js';
 
 export class Larva {
     constructor(game, x, y) {
@@ -34,17 +34,17 @@ export class Larva {
             }
         }
         // collision with objects
-        let collisionObjects = [this.game.player, ...this.game.obstacles,
+        const collisionObjects = [this.game.player, ...this.game.obstacles,
             ...this.game.eggs];
         collisionObjects.forEach(object => {
-            let [collison, distance, sumOfRadius, dx, dy] = this.game.checkCollision(this, object);
+            const [collison, distance, sumOfRadius, dx, dy] = this.game.checkCollision(this, object);
             if (collison) {
                 const unit_x = dx / distance;
                 const unit_y = dy / distance;
                 this.collisionX = object.collisionX + (sumOfRadius + 1) * unit_x;
                 this.collisionY = object.collisionY + (sumOfRadius + 1) * unit_y;
             }
-        })
+        });
         // collision with enemy
         this.game.enemies.forEach(enemy => {
             if (this.game.checkCollision(this, enemy)[0]) {
@@ -56,9 +56,9 @@ export class Larva {
                         this.collisionY, 'blue'));
                 }
             }
-        })
+        });
     }
-    
+
     draw(context) {
         context.drawImage(this.image,
             this.frameX * this.spriteWidth, this.frameY * this.spriteHeight,

@@ -20,14 +20,14 @@ export class Obstacles {
             this.frameX * this.spriteWidth, this.frameY * this.spriteHeight,
             this.spriteWidth, this.spriteHeight,
             this.spriteX, this.spriteY, this.width, this.height);
-            if (this.game.debug) {
-                context.beginPath();
-                context.arc(this.collisionX, this.collisionY, this.collisionRadius, 0, Math.PI * 2);
-                context.save();
-                context.globalAlpha = 0.5;
-                context.fill();
-                context.restore();
-            }
+        if (this.game.debug) {
+            context.beginPath();
+            context.arc(this.collisionX, this.collisionY, this.collisionRadius, 0, Math.PI * 2);
+            context.save();
+            context.globalAlpha = 0.5;
+            context.fill();
+            context.restore();
+        }
     }
     update() {}
 }

@@ -1,4 +1,4 @@
-import { Larva } from "./Larva.js";
+import { Larva } from './Larva.js';
 
 export class Egg {
     constructor(game) {
@@ -6,7 +6,8 @@ export class Egg {
         this.collisionRadius = 40;
         this.margin = this.collisionRadius * 2;
         this.collisionX = this.margin + (Math.random() * (this.game.width - this.margin * 2));
-        this.collisionY = this.game.topMargin + (Math.random() * (this.game.height - this.game.topMargin - this.margin));
+        this.collisionY = this.game.topMargin + (Math.random() *
+                            (this.game.height - this.game.topMargin - this.margin));
         this.image = document.getElementById('egg');
         this.spriteWidth = 110;
         this.spriteHeight = 135;
@@ -35,22 +36,22 @@ export class Egg {
     update(deltatime) {
         this.spriteX = this.collisionX - this.width * 0.5;
         this.spriteY = this.collisionY - this.height * 0.5 - 30;
-        let collisionObjects = [this.game.player, ...this.game.obstacles,
+        const collisionObjects = [this.game.player, ...this.game.obstacles,
             ...this.game.enemies, ...this.game.hatchlings];
         collisionObjects.forEach(object => {
-            let [collison, distance, sumOfRadius, dx, dy] = this.game.checkCollision(this, object);
+            const [collison, distance, sumOfRadius, dx, dy] = this.game.checkCollision(this, object);
             if (collison) {
                 const unit_x = dx / distance;
                 const unit_y = dy / distance;
                 this.collisionX = object.collisionX + (sumOfRadius + 1) * unit_x;
                 this.collisionY = object.collisionY + (sumOfRadius + 1) * unit_y;
             }
-        })
-        
-        // hatching 
+        });
+
+        // hatching
         if (this.hatchingTimer > this.hatchingInterval ||
             this.collisionY < this.game.topMargin) {
-            this.game.hatchlings.push( new Larva(this.game, this.collisionX, this.collisionY));
+            this.game.hatchlings.push(new Larva(this.game, this.collisionX, this.collisionY));
             this.markedForDeletion = true;
             this.game.removeGameObjects();
         } else {

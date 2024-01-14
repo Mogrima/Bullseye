@@ -121,14 +121,15 @@ export class Game {
                 message2 = 'You bullied the bullies!';
             } else {
                 // lose
-                message1 = 'Bullocks!'
-                message2 = 'You lost ' + this.lostHatchlings + ' hatchlings, don`t be a pushover!'
+                message1 = 'Bullocks!';
+                message2 = 'You lost ' + this.lostHatchlings + ' hatchlings, don`t be a pushover!';
             }
             context.font = '130px Bangers';
             context.fillText(message1, this.width * 0.5, this.height * 0.5 - 20);
             context.font = '40px Bangers';
             context.fillText(message2, this.width * 0.5, this.height * 0.5 + 30);
-            context.fillText("Final score " + this.score + ". Press 'R' to butt heads again!", this.width * 0.5, this.height * 0.5 + 80);
+            context.fillText('Final score ' + this.score + '. Press \'R\' to butt heads again!',
+                this.width * 0.5, this.height * 0.5 + 80);
             context.restore();
         }
     }
@@ -178,29 +179,29 @@ export class Game {
         }
         // circle packing
         let attempts = 0;
-        while(this.obstacles.length < this.
+        while (this.obstacles.length < this.
             numberOfObstacles && attempts < 500) {
-                let testObstacle = new Obstacles(this);
-                let overlap = false;
-                // circle collision detection
-                this.obstacles.forEach(obstacle => {
-                    const dx = testObstacle.collisionX - obstacle.collisionX;
-                    const dy = testObstacle.collisionY - obstacle.collisionY;
-                    const distance = Math.hypot(dy, dx);
-                    const distanceBuffer = 100;
-                    const sumOfRadius = testObstacle.collisionRadius + obstacle.collisionRadius + distanceBuffer;
-                    if (distance < sumOfRadius) {
-                        overlap = true;
-                    }
-                });
-                const margin = testObstacle.collisionRadius * 3;
-                if (!overlap && testObstacle.spriteX > 0 &&
+            const testObstacle = new Obstacles(this);
+            let overlap = false;
+            // circle collision detection
+            this.obstacles.forEach(obstacle => {
+                const dx = testObstacle.collisionX - obstacle.collisionX;
+                const dy = testObstacle.collisionY - obstacle.collisionY;
+                const distance = Math.hypot(dy, dx);
+                const distanceBuffer = 100;
+                const sumOfRadius = testObstacle.collisionRadius + obstacle.collisionRadius + distanceBuffer;
+                if (distance < sumOfRadius) {
+                    overlap = true;
+                }
+            });
+            const margin = testObstacle.collisionRadius * 3;
+            if (!overlap && testObstacle.spriteX > 0 &&
                     testObstacle.spriteX < this.width - testObstacle.width &&
                     testObstacle.collisionY > this.topMargin + margin &&
                     testObstacle.collisionY < this.height - margin) {
-                    this.obstacles.push(testObstacle);
-                }
-                attempts++;
+                this.obstacles.push(testObstacle);
             }
+            attempts++;
+        }
     }
 }

@@ -11,7 +11,7 @@ export class Enemy {
         this.height = this.spriteHeight;
         this.collisionX = this.game.width + this.width +
         Math.random() * this.game.width * 0.5;
-        this.collisionY = this.game.topMargin + 
+        this.collisionY = this.game.topMargin +
         (Math.random() * (this.game.height - this.game.topMargin));
         this.spriteX;
         this.spriteY;
@@ -40,24 +40,24 @@ export class Enemy {
         // повторное использование объектов, путем изменения их положения является хорошей практикой оптимизации
         // чем создавать новые объекты и удалить их потом
         if (this.spriteX + this.width < 0 && !this.game.gameOver) {
-            // Math.random() * this.game.width * 0.5 - добавляется к выражению чтобы задать 
+            // Math.random() * this.game.width * 0.5 - добавляется к выражению чтобы задать
             //рандомизированную задержку появления врагов
             this.collisionX = this.game.width + this.width +
             Math.random() * this.game.width * 0.5;
-            this.collisionY = this.game.topMargin + 
+            this.collisionY = this.game.topMargin +
             (Math.random() * (this.game.height - this.game.topMargin));
             this.frameY = Math.floor(Math.random() * 4);
         }
 
-        let collisionObjects = [this.game.player, ...this.game.obstacles];
+        const collisionObjects = [this.game.player, ...this.game.obstacles];
         collisionObjects.forEach(object => {
-            let [collison, distance, sumOfRadius, dx, dy] = this.game.checkCollision(this, object);
+            const [collison, distance, sumOfRadius, dx, dy] = this.game.checkCollision(this, object);
             if (collison) {
                 const unit_x = dx / distance;
                 const unit_y = dy / distance;
                 this.collisionX = object.collisionX + (sumOfRadius + 1) * unit_x;
                 this.collisionY = object.collisionY + (sumOfRadius + 1) * unit_y;
             }
-        })
+        });
     }
 }

@@ -25,7 +25,7 @@ export class Player {
         this.dy = this.game.mouse.y - this.collisionY;
         // sprite animation
         const angle = Math.atan2(this.dy, this.dx);
-        if (angle <  -2.74 || angle > 2.74) this.frameY = 6;
+        if (angle < -2.74 || angle > 2.74) this.frameY = 6;
         else if (angle < -1.96) this.frameY = 7;
         else if (angle < -1.17) this.frameY = 0;
         else if (angle < -0.39) this.frameY = 1;
@@ -33,7 +33,7 @@ export class Player {
         else if (angle < 1.17) this.frameY = 3;
         else if (angle < 1.96) this.frameY = 4;
         else if (angle < 2.74) this.frameY = 5;
-        
+
 
         const distance = Math.hypot(this.dy, this.dx);
         if (distance > this.speedModifer) {
@@ -57,12 +57,12 @@ export class Player {
         if (this.collisionY < this.game.topMargin + this.collisionRadius) {
             this.collisionY = this.game.topMargin + this.collisionRadius;
         } else if (this.collisionY > this.game.height - this.collisionRadius) {
-            this.collisionY = this.game.height - this.collisionRadius
+            this.collisionY = this.game.height - this.collisionRadius;
         }
         // collisions with obstacles
         this.game.obstacles.forEach(obstacle => {
             // destructuring assignment
-            let [collision, distance, sumOfRadius, dx, dy] = this.game.checkCollision(this, obstacle);
+            const [collision, distance, sumOfRadius, dx, dy] = this.game.checkCollision(this, obstacle);
             if (collision) {
                 const unit_x = dx / distance;
                 const unit_y = dy / distance;
@@ -71,7 +71,7 @@ export class Player {
                 this.collisionY = obstacle.collisionY +
                 (sumOfRadius + 1) * unit_y;
             }
-        })
+        });
     }
 
     restart() {
@@ -80,23 +80,23 @@ export class Player {
         this.spriteX = this.collisionX - this.width * 0.5;
         this.spriteY = this.collisionY - this.height * 0.5 - 100;
     }
-    
+
     draw(context) {
         context.drawImage(this.image, this.frameX * this.spriteWidth,
             this.frameY * this.spriteHeight, this.spriteWidth,
             this.spriteHeight, this.spriteX, this.spriteY,
             this.width, this.height);
-            if (this.game.debug) {
-                context.beginPath();
-                context.arc(this.collisionX, this.collisionY, this.collisionRadius, 0, Math.PI * 2);
-                context.save();
-                context.globalAlpha = 0.5;
-                context.fill();
-                context.restore();
-                context.beginPath();
-                context.moveTo(this.collisionX, this.collisionY);
-                context.lineTo(this.game.mouse.x, this.game.mouse.y);
-                context.stroke();
-            }
+        if (this.game.debug) {
+            context.beginPath();
+            context.arc(this.collisionX, this.collisionY, this.collisionRadius, 0, Math.PI * 2);
+            context.save();
+            context.globalAlpha = 0.5;
+            context.fill();
+            context.restore();
+            context.beginPath();
+            context.moveTo(this.collisionX, this.collisionY);
+            context.lineTo(this.game.mouse.x, this.game.mouse.y);
+            context.stroke();
+        }
     }
 }
