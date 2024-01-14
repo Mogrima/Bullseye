@@ -58,8 +58,10 @@ export class Game {
             }
         });
         window.addEventListener('keydown', e => {
-            if (e.key === 'd') this.debug = !this.debug;
-            else if (e.key === 'r' || e.key === 'R') this.restart();
+            if (e.key === 'd' || e.key === 'R'
+                || e.key === 'в' || e.key === 'В') this.debug = !this.debug;
+            else if (e.key === 'r' || e.key === 'R'
+                    || e.key === 'К' || e.key === 'к') this.restart();
         });
     }
 
