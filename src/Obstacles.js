@@ -11,7 +11,7 @@ export class Obstacles {
         this.height = this.spriteHeight;
         this.spriteX = this.collisionX - this.width * 0.5;
         this.spriteY = this.collisionY - this.height * 0.5 - 70;
-        this.frameX = Math.floor(Math.random() * 4);
+        this.frameX = Math.floor(Math.random() * 5);
         this.frameY = Math.floor(Math.random() * 3);
     }
 
